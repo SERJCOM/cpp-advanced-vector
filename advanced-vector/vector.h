@@ -257,8 +257,7 @@ public:
             size_t old_size = size_;
             Reserve(new_size);
             std::uninitialized_value_construct_n(data_.GetAddress() + old_size, new_size - old_size);
-        } 
-        else{
+        }  else {
             std::destroy_n(data_.GetAddress() + new_size, size_ - new_size); 
         }
 
@@ -277,8 +276,7 @@ public:
             Construct(data_.GetAddress() + size_, std::forward<Type>(value));
         } 
 
-        size_++;
-            
+        size_++; 
     }
 
 
@@ -311,8 +309,7 @@ public:
     }
 
     ~Vector() {
-        if(size_ != 0)
-            std::destroy_n(data_.GetAddress(), size_);
+        std::destroy_n(data_.GetAddress(), size_);
     }
 
     
