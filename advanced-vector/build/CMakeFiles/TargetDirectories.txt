@@ -1,0 +1,3 @@
+/home/sergei/prog/practicum/cpp-advanced-vector/advanced-vector/build/CMakeFiles/vector.dir
+/home/sergei/prog/practicum/cpp-advanced-vector/advanced-vector/build/CMakeFiles/edit_cache.dir
+/home/sergei/prog/practicum/cpp-advanced-vector/advanced-vector/build/CMakeFiles/rebuild_cache.dir
