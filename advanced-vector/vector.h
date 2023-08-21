@@ -160,12 +160,17 @@ public:
                 
                 } else{
                     std::uninitialized_copy_n(data_.GetAddress(), itpos, newmemory.GetAddress());
-                    std::uninitialized_copy_n(data_.GetAddress() + itpos , end() - pos, newmemory.GetAddress() + itpos + 1);
+                    try{
+                        std::uninitialized_copy_n(data_.GetAddress() + itpos , end() - pos, newmemory.GetAddress() + itpos + 1);
+                    }
+                    catch(...){
+                        std::destroy_n(newmemory.GetAddress(), itpos);
+                        throw;
+                    }
                 }
             }
             catch(...){
                 std::destroy_at(newmemory.GetAddress() + itpos);
-                std::destroy_n(data_.GetAddress(), size_);
                 throw;
             }
             data_.Swap(newmemory);
@@ -241,9 +246,8 @@ public:
     Vector& operator=(Vector&& rhs) noexcept{
         
         std::swap(data_, rhs.data_);
-        //data_ = std::move(rhs.data_);
-        size_ = rhs.size_;
-        rhs.size_ = 0;
+        std::swap(size_, rhs.size_);
+
         return *this;
     }
 
